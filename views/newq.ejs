@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family:'Sacremanto',cursive !important;
+      background-image: url('/images/13.png'); /* Replace with your actual background image */
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+  background-image: url('images/14.png');
+  background-size: cover;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  margin: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 200, 255, 0.8); /* Light purple-pink background */
+}
+
+h1 {
+  color: #8b008b; /* Dark purple */
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+  font-size: 16px;
+  color: #8b008b; /* Dark purple */
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  border: 1px solid #8b008b; /* Dark purple border */
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #ff69b4; /* Hot pink when focused */
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background: linear-gradient(45deg, #c074e4, #180b12) ; /* Hot pink */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background: linear-gradient(45deg, #c761a0, #e0d5e5); /* Darker pink on hover */
+}
+
+  </style>
+  <title>Kdrama Life Lessons Form</title>
+</head>
+<body>
+
+  <form method="post" action="/addq">
+    <h1>Life Lessons from Kdrama</h1>
+    <label for="kdramaTitle">Kdrama Title:</label>
+    <input type="text" id="kdramaTitle" name="kdramaTitle" placeholder="Enter Kdrama Title" required>
+
+    <label for="kdramaQuote">Kdrama Quote:</label>
+    <textarea id="kdramaQuote" name="kdramaQuote" placeholder="Enter Kdrama Quote" rows="4" required></textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>

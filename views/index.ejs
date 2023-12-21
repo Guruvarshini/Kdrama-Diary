@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLife</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sacramento&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700|Open+Sans">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+      <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg shadow fixed-top">
+        <div class="container">
+            <div class="navbar-brand" style="font-family: 'Sacramento', cursive; font-size: 50px; font-weight: bold; color: black; font-style: italic;">
+                <a>KLife</a>
+              </div> 
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#head">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#diary">Diary</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#life_lessons">Life Lessons</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#to_watch">To Watch</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <section id="head">
+      <header class="masthead">
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+          </div>
+        </div>
+      </header>
+    </section>
+      <section id="diary" style="background-color: blanchedalmond; background-size: cover;min-height: 100vh;" >
+        <h1 style="color: rgb(214, 55, 214); font-family: 'Sacremanto',cursive !important;text-align: center;padding: 10px;">My Kdrama Diary</h1>
+        <br>
+        <form method="post" action="/addkdrama">
+            <button type="submit" class="kdrama-button">Add Kdrama</button>
+        </form>
+        <br>
+        <% for( let i = 0; i < kdramas.length; i++ ) { %>
+          <article class="postcard dark blue">
+              <img class="postcard__img" src="<%=kdramas[i].thumb%>" alt="Image Title" />
+            <div class="postcard__text">
+              <h1 class="postcard__title blue"><a href="<%=kdramas[i].url%>"><%=kdramas[i].title%></a></h1>
+              <div class="postcard__subtitle small" style="margin-left: 20px;">
+                <%if(kdramas[i].ranking){%>Ranking: <%=kdramas[i].ranking%><%}%>
+              </div>
+              <div class="postcard__bar" style="margin-left: 20px;"></div>
+              <div class="postcard__preview-txt">
+                <form action="/editdes" method="post">
+                  <input type="hidden" name="updatedItemId" value="<%= kdramas[i].id %>">
+                  <input id="input<%=kdramas[i].id%>" style="color: beige;" type="text" name="updatedItemDescription" value="<%= kdramas[i].description %>" autocomplete="off" autofocus="true" hidden="true" />
+                  <br>
+                  <button id="done<%=kdramas[i].id%>" class="edit" type="submit" hidden><img class="icon" src="/images/check-solid.svg" alt="tick image"></button>
+              </form>
+              
+                <p id="title<%=kdramas[i].id%>" style="color: beige;">
+                  <%= kdramas[i].description %><br></p>
+                  <form action="editrate" method="post">
+                    <input type="hidden" name="updatedItemId" value="<%= kdramas[i].id %>">
+                    <input id="rate<%=kdramas[i].id%>" style="color: beige;" type="text" name="updatedItemRating" value="<%= kdramas[i].rating %>" autocomplete="off" hidden="true" />
+                    <button id="don<%=kdramas[i].id%>" class="edit" type="submit" hidden><img class="icon" src="/images/check-solid.svg" alt="tick image"></button>
+                  </form>
+                <p id="tit<%=kdramas[i].id%>" style="color: beige;">
+                  <b>Rating: <%=kdramas[i].rating%></b>
+                  <button id="edi<%=kdramas[i].id%>" class="edit" onclick="handle('<%=kdramas[i].id%>')"><img class="icon"
+                    src="/images/pencil-solid.svg" alt="pencil image"></button>
+                </p>
+                <div>
+              <ul class="postcard__tagbox" style="list-style-type: none;">
+                <li style="color: beige;"><b><%=kdramas[i].episodes%></b></li>
+                <li class="tag__item play blue" style="color: beige;margin-left: 10px;margin-right: 10px;">
+                  <a href="<%=kdramas[i].url%>">Play</a>
+                </li>
+                <li style="margin-left: 10px;margin-right: 10px;">
+                  <button id="edit<%=kdramas[i].id%>" class="edit" onclick="handler('<%=kdramas[i].id%>')"><img class="icon"
+                    src="/images/pencil-solid.svg" alt="pencil image"></button>
+                </li>
+                <li style="margin-left: 10px;margin-right: 10px;">
+                  <form action="deletek" method="post">
+                    <input type="hidden" name="deleteItemId" value="<%= kdramas[i].id %>">
+                    <button id="done<%=kdramas[i].id%>" class="edit" type="submit">
+                        <img class="icon" src="/images/delete.svg" alt="delete image" style="fill: beige;">
+                    </button>
+                </form>
+                
+                </li>
+              </ul>
+            </div>
+          </article>
+          
+        <% } %>
+        <script>
+          function handle(id){
+            document.getElementById("tit" + id).setAttribute("hidden", true);
+              document.getElementById("edi" + id).setAttribute("hidden", true);
+              document.getElementById("don" + id).removeAttribute("hidden");
+              document.getElementById("rate" + id).removeAttribute("hidden");
+          }
+          function handler(id) {
+              document.getElementById("title" + id).setAttribute("hidden", true);
+              document.getElementById("edit" + id).setAttribute("hidden", true);
+              document.getElementById("done" + id).removeAttribute("hidden");
+              document.getElementById("input" + id).removeAttribute("hidden");
+          }
+      </script>
+      </section>
+      <section id="life_lessons" style="background-image: url('images/20.png'); background-size: cover;"      >
+        <h1 style="color: rgb(192, 96, 192); font-family: 'Sacremanto',cursive !important;text-align: center;">Life Lessons</h1>
+        <form method="post" action="/addquotes">
+            <button type="submit" class="kdrama-button">Add Quotes</button>
+        </form>
+        <div class="container">
+            <div class="row">
+                <div class="container">
+                    <% for( let i = 0; i < quotes.length; i++ ) { %>
+                        <blockquote class="quote-card">
+                            <p class="p">
+                                <%=quotes[i].quotes%>
+                            </p>
+                    
+                            <cite class="cite">
+                                <%=quotes[i].title%>
+                            </cite>
+                        </blockquote>
+                    <% } %>
+                    
+                </div>
+            </div>
+    </div>
+      </section>
+      <section id="to_watch" style="background-image: url('images/11.gif'); background-size: cover; background-position: center;"      >
+        <div class="box1" id="heading">
+            <h1>
+              To Watch List
+            </h1>
+          </div>
+          <div class="box">
+            <% for(let item of listItems){%>
+              <div class="item">
+                <form action="/delete" method="post">
+                  <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
+                </form>
+        
+                <p id="title<%=item.id%>">
+                  <%= item.titles %>
+                </p>
+        
+                <form class="edit" action="/edit" method="post">
+                  <input type="hidden" name="updatedItemId" value="<%= item.id %>">
+                  <input id="input<%=item.id%>" type="text" name="updatedItemTitle" value="<%= item.titles %>" autocomplete="off"
+                    autofocus="true" hidden="true" />
+                  <button id="done<%=item.id%>" class="edit" type="submit" hidden><img class="icon"
+                      src="/images/check-solid.svg" alt="tick image"></button>
+                </form>
+                <button id="edit<%=item.id%>" class="edit" onclick="handler('<%=item.id%>')"><img class="icon"
+                    src="/images/pencil-solid.svg" alt="pencil image"></button>
+              </div>
+              <% } %>
+        
+                <form class="item" action="/add" method="post">
+                  <input type="text" name="newItem" placeholder="New Drama" autocomplete="off" autofocus="true" />
+                  <button class="add" type="submit" name="list">+</button>
+                </form>
+          </div>
+          <script>
+            function handler(id) {
+              document.getElementById("title" + id).setAttribute("hidden", true)
+              document.getElementById("edit" + id).setAttribute("hidden", true)
+              document.getElementById("done" + id).removeAttribute("hidden")
+              document.getElementById("input" + id).removeAttribute("hidden")
+            }
+          </script>
+      </section>
+      
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
