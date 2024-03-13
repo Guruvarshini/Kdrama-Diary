@@ -66,7 +66,7 @@ app.post("/addquotes",async(req,res)=>{
   res.render("newq.ejs");
 });
 app.post("/addq",async(req,res)=>{
-   db.query("insert into quotes(title,quotes) values($1,$2)",[req.body.kdramaTitle,req.body.kdramaQuote]);
+   db.query("insert into quotes(title,quote) values($1,$2)",[req.body.kdramaTitle,req.body.kdramaQuote]);
    const ttt=await db.query("select * from quotes order by id");
    quotes = ttt.rows;
    res.redirect("/");
